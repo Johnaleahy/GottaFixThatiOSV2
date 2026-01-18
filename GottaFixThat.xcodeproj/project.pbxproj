@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		CA4BB28B2F1CF6DC00E69EF2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA4BB2702F1CF6DA00E69EF2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA4BB2772F1CF6DA00E69EF2;
+			remoteInfo = GottaFixThat;
+		};
+		CA4BB2952F1CF6DC00E69EF2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA4BB2702F1CF6DA00E69EF2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA4BB2772F1CF6DA00E69EF2;
+			remoteInfo = GottaFixThat;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CA4BB2782F1CF6DA00E69EF2 /* GottaFixThat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GottaFixThat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA4BB28A2F1CF6DC00E69EF2 /* GottaFixThatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GottaFixThatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA4BB2942F1CF6DC00E69EF2 /* GottaFixThatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GottaFixThatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		CA4BB27A2F1CF6DA00E69EF2 /* GottaFixThat */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GottaFixThat;
+			sourceTree = "<group>";
+		};
+		CA4BB28D2F1CF6DC00E69EF2 /* GottaFixThatTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GottaFixThatTests;
+			sourceTree = "<group>";
+		};
+		CA4BB2972F1CF6DC00E69EF2 /* GottaFixThatUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GottaFixThatUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CA4BB2752F1CF6DA00E69EF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA4BB2872F1CF6DC00E69EF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA4BB2912F1CF6DC00E69EF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CA4BB26F2F1CF6DA00E69EF2 = {
+			isa = PBXGroup;
+			children = (
+				CA4BB27A2F1CF6DA00E69EF2 /* GottaFixThat */,
+				CA4BB28D2F1CF6DC00E69EF2 /* GottaFixThatTests */,
+				CA4BB2972F1CF6DC00E69EF2 /* GottaFixThatUITests */,
+				CA4BB2792F1CF6DA00E69EF2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CA4BB2792F1CF6DA00E69EF2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CA4BB2782F1CF6DA00E69EF2 /* GottaFixThat.app */,
+				CA4BB28A2F1CF6DC00E69EF2 /* GottaFixThatTests.xctest */,
+				CA4BB2942F1CF6DC00E69EF2 /* GottaFixThatUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CA4BB2772F1CF6DA00E69EF2 /* GottaFixThat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA4BB29E2F1CF6DC00E69EF2 /* Build configuration list for PBXNativeTarget "GottaFixThat" */;
+			buildPhases = (
+				CA4BB2742F1CF6DA00E69EF2 /* Sources */,
+				CA4BB2752F1CF6DA00E69EF2 /* Frameworks */,
+				CA4BB2762F1CF6DA00E69EF2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CA4BB27A2F1CF6DA00E69EF2 /* GottaFixThat */,
+			);
+			name = GottaFixThat;
+			packageProductDependencies = (
+			);
+			productName = GottaFixThat;
+			productReference = CA4BB2782F1CF6DA00E69EF2 /* GottaFixThat.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CA4BB2892F1CF6DC00E69EF2 /* GottaFixThatTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA4BB2A12F1CF6DC00E69EF2 /* Build configuration list for PBXNativeTarget "GottaFixThatTests" */;
+			buildPhases = (
+				CA4BB2862F1CF6DC00E69EF2 /* Sources */,
+				CA4BB2872F1CF6DC00E69EF2 /* Frameworks */,
+				CA4BB2882F1CF6DC00E69EF2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA4BB28C2F1CF6DC00E69EF2 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CA4BB28D2F1CF6DC00E69EF2 /* GottaFixThatTests */,
+			);
+			name = GottaFixThatTests;
+			packageProductDependencies = (
+			);
+			productName = GottaFixThatTests;
+			productReference = CA4BB28A2F1CF6DC00E69EF2 /* GottaFixThatTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CA4BB2932F1CF6DC00E69EF2 /* GottaFixThatUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA4BB2A42F1CF6DC00E69EF2 /* Build configuration list for PBXNativeTarget "GottaFixThatUITests" */;
+			buildPhases = (
+				CA4BB2902F1CF6DC00E69EF2 /* Sources */,
+				CA4BB2912F1CF6DC00E69EF2 /* Frameworks */,
+				CA4BB2922F1CF6DC00E69EF2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA4BB2962F1CF6DC00E69EF2 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CA4BB2972F1CF6DC00E69EF2 /* GottaFixThatUITests */,
+			);
+			name = GottaFixThatUITests;
+			packageProductDependencies = (
+			);
+			productName = GottaFixThatUITests;
+			productReference = CA4BB2942F1CF6DC00E69EF2 /* GottaFixThatUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CA4BB2702F1CF6DA00E69EF2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					CA4BB2772F1CF6DA00E69EF2 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					CA4BB2892F1CF6DC00E69EF2 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = CA4BB2772F1CF6DA00E69EF2;
+					};
+					CA4BB2932F1CF6DC00E69EF2 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = CA4BB2772F1CF6DA00E69EF2;
+					};
+				};
+			};
+			buildConfigurationList = CA4BB2732F1CF6DA00E69EF2 /* Build configuration list for PBXProject "GottaFixThat" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CA4BB26F2F1CF6DA00E69EF2;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = CA4BB2792F1CF6DA00E69EF2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CA4BB2772F1CF6DA00E69EF2 /* GottaFixThat */,
+				CA4BB2892F1CF6DC00E69EF2 /* GottaFixThatTests */,
+				CA4BB2932F1CF6DC00E69EF2 /* GottaFixThatUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CA4BB2762F1CF6DA00E69EF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA4BB2882F1CF6DC00E69EF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA4BB2922F1CF6DC00E69EF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CA4BB2742F1CF6DA00E69EF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA4BB2862F1CF6DC00E69EF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA4BB2902F1CF6DC00E69EF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CA4BB28C2F1CF6DC00E69EF2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA4BB2772F1CF6DA00E69EF2 /* GottaFixThat */;
+			targetProxy = CA4BB28B2F1CF6DC00E69EF2 /* PBXContainerItemProxy */;
+		};
+		CA4BB2962F1CF6DC00E69EF2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA4BB2772F1CF6DA00E69EF2 /* GottaFixThat */;
+			targetProxy = CA4BB2952F1CF6DC00E69EF2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CA4BB29C2F1CF6DC00E69EF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CA4BB29D2F1CF6DC00E69EF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CA4BB29F2F1CF6DC00E69EF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"GottaFixThat/Preview Content\"";
+				DEVELOPMENT_TEAM = JHLEUP2UE8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.immediac.GottaFixThat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CA4BB2A02F1CF6DC00E69EF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"GottaFixThat/Preview Content\"";
+				DEVELOPMENT_TEAM = JHLEUP2UE8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.immediac.GottaFixThat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CA4BB2A22F1CF6DC00E69EF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JHLEUP2UE8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.immediac.GottaFixThatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GottaFixThat.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GottaFixThat";
+			};
+			name = Debug;
+		};
+		CA4BB2A32F1CF6DC00E69EF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JHLEUP2UE8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.immediac.GottaFixThatTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GottaFixThat.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GottaFixThat";
+			};
+			name = Release;
+		};
+		CA4BB2A52F1CF6DC00E69EF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JHLEUP2UE8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.immediac.GottaFixThatUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GottaFixThat;
+			};
+			name = Debug;
+		};
+		CA4BB2A62F1CF6DC00E69EF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JHLEUP2UE8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.immediac.GottaFixThatUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GottaFixThat;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CA4BB2732F1CF6DA00E69EF2 /* Build configuration list for PBXProject "GottaFixThat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA4BB29C2F1CF6DC00E69EF2 /* Debug */,
+				CA4BB29D2F1CF6DC00E69EF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA4BB29E2F1CF6DC00E69EF2 /* Build configuration list for PBXNativeTarget "GottaFixThat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA4BB29F2F1CF6DC00E69EF2 /* Debug */,
+				CA4BB2A02F1CF6DC00E69EF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA4BB2A12F1CF6DC00E69EF2 /* Build configuration list for PBXNativeTarget "GottaFixThatTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA4BB2A22F1CF6DC00E69EF2 /* Debug */,
+				CA4BB2A32F1CF6DC00E69EF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA4BB2A42F1CF6DC00E69EF2 /* Build configuration list for PBXNativeTarget "GottaFixThatUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA4BB2A52F1CF6DC00E69EF2 /* Debug */,
+				CA4BB2A62F1CF6DC00E69EF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CA4BB2702F1CF6DA00E69EF2 /* Project object */;
+}
