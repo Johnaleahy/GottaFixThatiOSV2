@@ -31,12 +31,21 @@ xcodebuild test -project GottaFixThat.xcodeproj -scheme GottaFixThat -destinatio
 
 ## Architecture
 
+### MVVM Architecture Pattern
+The app follows **MVVM (Model-View-ViewModel)** architecture with a **Service-Based** approach optimized for SwiftUI and SwiftData:
+
+- **Models**: Data structures using SwiftData's @Model macro
+- **Views**: SwiftUI views with @Query for reactive data binding
+- **Services**: Business logic and data operations layer
+- **Utilities**: Extensions, helpers, and constants
+
 ### Data Flow Pattern
 The app uses SwiftUI with SwiftData for reactive data management:
 
-1. **GottaFixThatApp.swift** - App entry point, initializes SwiftData ModelContainer
-2. **ContentView.swift** - Main UI using NavigationSplitView for master-detail layout
-3. **Item.swift** - Core data model using @Model for persistence
+1. **App/GottaFixThatApp.swift** - App entry point, initializes SwiftData ModelContainer
+2. **Views/Main/ContentView.swift** - Main UI using NavigationSplitView for master-detail layout
+3. **Models/Item.swift** - Core data model using @Model for persistence
+4. **Services**: Handle complex business logic and data operations (to be implemented)
 
 ### SwiftData Integration
 - ModelContainer initialized in app with schema: `[Item.self]`
@@ -58,18 +67,34 @@ The app uses SwiftUI with SwiftData for reactive data management:
 
 ## File Locations
 
-### Core Application Files
-- `GottaFixThat/GottaFixThatApp.swift` - App entry point (32 lines)
-- `GottaFixThat/ContentView.swift` - Main UI view (61 lines)
-- `GottaFixThat/Item.swift` - Data model (18 lines)
+### Project Structure (MVVM)
+```
+GottaFixThat/
+├── App/
+│   └── GottaFixThatApp.swift - App entry point
+├── Models/
+│   └── Item.swift - Data models with @Model
+├── Views/
+│   ├── Main/
+│   │   └── ContentView.swift - Main navigation view
+│   ├── List/ - List-related views
+│   ├── Detail/ - Detail views
+│   └── Components/ - Reusable UI components
+├── Services/ - Business logic and data operations
+├── Utilities/
+│   ├── Extensions/
+│   │   └── Color+Extension.swift - Custom colors
+│   ├── Helpers/ - Utility functions
+│   └── Constants/ - App constants
+└── Resources/
+    ├── Assets.xcassets/ - Images, colors, app icons
+    └── Preview Content/ - Preview assets
+```
 
 ### Test Files
 - `GottaFixThatTests/GottaFixThatTests.swift` - Unit tests (uses Swift Testing framework)
 - `GottaFixThatUITests/GottaFixThatUITests.swift` - UI tests
 - `GottaFixThatUITests/GottaFixThatUITestsLaunchTests.swift` - Launch performance tests
-
-### Assets
-- `GottaFixThat/Assets.xcassets/` - Contains app icons, accent color (RGB: 0.643, 0.788, 0.329), and header image
 
 ## Current State
 
