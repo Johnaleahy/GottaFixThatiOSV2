@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GottaFixThat Review Comparison</title>
+  <style>
+    :root {
+      --bg: #0c223d;
+      --panel: #14365d;
+      --panel-soft: #f5f7fb;
+      --text: #f5f7fb;
+      --text-dark: #16324d;
+      --muted: #aac0d9;
+      --accent: #9aca3c;
+      --border: rgba(255, 255, 255, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(154, 202, 60, 0.08), transparent 28%),
+        linear-gradient(180deg, #0a2746 0%, #091c31 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+
+    h1, h2, h3, p {
+      margin: 0;
+    }
+
+    .hero {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 28px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: rgba(20, 54, 93, 0.7);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 900px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .chip strong {
+      color: var(--accent);
+      margin-right: 6px;
+    }
+
+    .section {
+      margin-top: 22px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .section-header {
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 28, 49, 0.76);
+    }
+
+    .section-header p {
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.9fr);
+      gap: 0;
+    }
+
+    .visuals {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(9, 28, 49, 0.5);
+    }
+
+    .panel h3 {
+      padding: 14px 16px;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .panel img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #0a1320;
+    }
+
+    .panel .empty {
+      min-height: 320px;
+      padding: 20px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .notes {
+      padding: 20px 22px;
+      background: var(--panel-soft);
+      color: var(--text-dark);
+    }
+
+    .notes h3 {
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+
+    .notes ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .notes li + li {
+      margin-top: 8px;
+    }
+
+    .status {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #eaf3db;
+      border: 1px solid rgba(154, 202, 60, 0.35);
+      color: #284322;
+    }
+
+    .status.pending {
+      background: #eef2f7;
+      border-color: rgba(22, 50, 77, 0.12);
+      color: #35506a;
+    }
+
+    .links {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .links a {
+      color: #0f4f8e;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 980px) {
+      .compare-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .visuals {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <h1>GottaFixThat Interface Review Comparison</h1>
+      <p>
+        This page lines up the PDF review pages, the extracted notes, and the current
+        reference screenshots we already have in the repo. It is meant to help us
+        visually verify whether the implementation is matching the review feedback.
+      </p>
+      <div class="legend">
+        <span class="chip"><strong>Review</strong> PDF page image</span>
+        <span class="chip"><strong>Current</strong> repo screenshot or placeholder</span>
+        <span class="chip"><strong>Status</strong> quick read on whether we addressed it in code</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Page 2: Intro / Home Entry</h2>
+        <p>Focus: intro layout, icon consistency, and the overall first-screen composition.</p>
+      </div>
+      <div class="compare-grid">
+        <div class="visuals">
+          <article class="panel">
+            <h3>Review Page</h3>
+            <img src="./review-page-02.png" alt="Review page 2">
+          </article>
+          <article class="panel">
+            <h3>Current App Screenshot</h3>
+            <img src="../Screenshots/one-Intro.png" alt="Current intro screenshot">
+          </article>
+        </div>
+        <aside class="notes">
+          <h3>Review Notes</h3>
+          <ul>
+            <li>These icons should have consistent line weight.</li>
+            <li>The camera icon was called out as feeling like it does not belong in the set.</li>
+          </ul>
+          <div class="status pending">
+            Current read: button sizing, color, and font weight are consistent; the symbol family is still a judgment call and not fully proven from code alone.
+          </div>
+          <div class="links">
+            <a href="/Users/johnleahy/iosProjects/GottaFixThat/GottaFixThat/Views/Main/IntroView.swift">Open IntroView.swift</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Page 3: Property Cards / Header</h2>
+        <p>Focus: logo centering, logo scale, and dark-mode card styling.</p>
+      </div>
+      <div class="compare-grid">
+        <div class="visuals">
+          <article class="panel">
+            <h3>Review Page</h3>
+            <img src="./review-page-03.png" alt="Review page 3">
+          </article>
+          <article class="panel">
+            <h3>Current App Screenshot</h3>
+            <div class="empty">No fresh screenshot saved yet for the current property cards screen.</div>
+          </article>
+        </div>
+        <aside class="notes">
+          <h3>Review Notes</h3>
+          <ul>
+            <li>Check centering on the logo.</li>
+            <li>Consider making the logo larger so it does not feel the same size as the camera area.</li>
+            <li>In dark mode, use darker card surfaces with white or gray text.</li>
+          </ul>
+          <div class="status">
+            Current read: code was updated to enlarge the toolbar logo and add brand-driven dark card styling, but this still needs a fresh screenshot to confirm visual centering.
+          </div>
+          <div class="links">
+            <a href="/Users/johnleahy/iosProjects/GottaFixThat/GottaFixThat/Views/Components/AppHeaderContainer.swift">Open AppHeaderContainer.swift</a>
+            <a href="/Users/johnleahy/iosProjects/GottaFixThat/GottaFixThat/Views/Components/PropertyCardView.swift">Open PropertyCardView.swift</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Page 4: Property Lists Screen</h2>
+        <p>Focus: list copy, icon choice, and stronger navigation arrows.</p>
+      </div>
+      <div class="compare-grid">
+        <div class="visuals">
+          <article class="panel">
+            <h3>Review Page</h3>
+            <img src="./review-page-04.png" alt="Review page 4">
+          </article>
+          <article class="panel">
+            <h3>Current App Screenshot</h3>
+            <div class="empty">No fresh screenshot saved yet for the property lists screen.</div>
+          </article>
+        </div>
+        <aside class="notes">
+          <h3>Review Notes</h3>
+          <ul>
+            <li>Spell check: use “Refurb”.</li>
+            <li>Shed Cleanup icon should feel more like a broom than a commercial building.</li>
+            <li>Arrows should have more presence through size or lighter color.</li>
+          </ul>
+          <div class="status">
+            Current read: sample data was updated to use a broom icon and the list chevrons were made larger and greener; the final visual pass still needs a new screenshot.
+          </div>
+          <div class="links">
+            <a href="/Users/johnleahy/iosProjects/GottaFixThat/GottaFixThat/Views/Main/PropertyListsView.swift">Open PropertyListsView.swift</a>
+            <a href="/Users/johnleahy/iosProjects/GottaFixThat/GottaFixThat/Utilities/Helpers/SampleData.swift">Open SampleData.swift</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Page 5: Fix List Detail Screen</h2>
+        <p>Focus: card radius, thumbnails, square checkboxes, detail disclosure, and row simplification.</p>
+      </div>
+      <div class="compare-grid">
+        <div class="visuals">
+          <article class="panel">
+            <h3>Review Page</h3>
+            <img src="./review-page-05.png" alt="Review page 5">
+          </article>
+          <article class="panel">
+            <h3>Current App Screenshot</h3>
+            <img src="../Screenshots/TwoListDetails.png" alt="Current list details screenshot">
+          </article>
+        </div>
+        <aside class="notes">
+          <h3>Review Notes</h3>
+          <ul>
+            <li>The Kim's Bedroom summary block should match the corner radius used elsewhere.</li>
+            <li>List items should be able to show a photo thumbnail.</li>
+            <li>Square checkboxes would align better with the logo language.</li>
+            <li>Item descriptions should stay off this screen and live in the item detail view instead.</li>
+            <li>It should be clearer that tapping a task opens more detail.</li>
+          </ul>
+          <div class="status">
+            Current read: the code now uses square checkboxes, stronger chevrons, tappable rows, thumbnail support, and removes inline descriptions from the list view. This page has the strongest code alignment with the review notes.
+          </div>
+          <div class="links">
+            <a href="/Users/johnleahy/iosProjects/GottaFixThat/GottaFixThat/Views/Main/FixListDetailView.swift">Open FixListDetailView.swift</a>
+            <a href="/Users/johnleahy/iosProjects/GottaFixThat/GottaFixThat/Views/Components/SquareCheckboxView.swift">Open SquareCheckboxView.swift</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Page 6: Dark Mode Direction</h2>
+        <p>Focus: whether dark mode should lean brand navy instead of pure black/gray.</p>
+      </div>
+      <div class="compare-grid">
+        <div class="visuals">
+          <article class="panel">
+            <h3>Review Page</h3>
+            <img src="./review-page-06.png" alt="Review page 6">
+          </article>
+          <article class="panel">
+            <h3>Current App Screenshot</h3>
+            <div class="empty">No fresh dark-mode screenshot saved yet for current screens.</div>
+          </article>
+        </div>
+        <aside class="notes">
+          <h3>Review Notes</h3>
+          <ul>
+            <li>Consider using a dark navy or blue as the dark-mode foundation instead of black or neutral gray.</li>
+          </ul>
+          <div class="status">
+            Current read: a brand navy-based dark surface palette was introduced in code for the active screens, but this needs a visual capture to confirm it feels right.
+          </div>
+          <div class="links">
+            <a href="/Users/johnleahy/iosProjects/GottaFixThat/GottaFixThat/Utilities/Extensions/Color+Extension.swift">Open Color+Extension.swift</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Page 7: App Icon Review</h2>
+        <p>Focus: icon composition in circular contexts and Icon Composer workflow questions.</p>
+      </div>
+      <div class="compare-grid">
+        <div class="visuals">
+          <article class="panel">
+            <h3>Review Page</h3>
+            <img src="./review-page-07.png" alt="Review page 7">
+          </article>
+          <article class="panel">
+            <h3>Current Assets</h3>
+            <div class="empty">This comparison still needs a dedicated icon board or exported app-icon variants.</div>
+          </article>
+        </div>
+        <aside class="notes">
+          <h3>Review Notes</h3>
+          <ul>
+            <li>Check whether the icon composition should be reduced for circular contexts like Apple Watch.</li>
+            <li>Confirm whether Icon Composer can generate the liquid glass variants and what source files it needs.</li>
+          </ul>
+          <div class="status pending">
+            Current read: still open. This is a design and asset workflow decision rather than a finished implementation change.
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

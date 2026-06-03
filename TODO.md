@@ -51,6 +51,7 @@
 - [ ] Creation/modification timestamps
 
 ### Photo Annotation
+- [x] Allow simple image markup
 - [ ] Draw on photos (circles, arrows)
 - [ ] Add text overlays to photos
 - [ ] Multiple photos per item (carousel)
@@ -85,6 +86,7 @@
 
 ### Smart Features
 - [ ] Personalized welcome messages ("Hey Rebecca!")
+- [ ] Add AI features and job planning
 - [ ] AI task suggestions based on date/season
 - [ ] Weather-based recommendations
 - [ ] Time estimation calculator for grouped tasks
@@ -101,6 +103,7 @@
 ## Phase 4: Polish & Production 🎨
 
 ### Notifications
+- [ ] Set up notifications
 - [ ] Local notifications for due items
 - [ ] Reminder scheduling
 - [ ] Push notifications for shared list updates
@@ -155,6 +158,85 @@
 - [ ] Seasonal maintenance reminders
 - [ ] Natural language task input
 - [ ] Voice commands with Siri
+
+---
+
+## Consistency Follow-Up 🧭
+
+- [ ] Consolidate the duplicate navigation/UI flows so the app uses one shared architecture instead of parallel `ContentView` and `FixAppHeaderView` paths
+- [ ] Standardize property creation so all entry points assign the same owner data and use one default-user strategy
+- [ ] Apply the shared color palette consistently across views instead of mixing custom RGB values and unrelated system colors
+- [ ] Standardize file conventions across the codebase (header format, date format, model/type declaration conventions)
+
+---
+
+## Interface Review Feedback 📄
+
+*From `/Users/johnleahy/Downloads/FIX App Interface Review 2026-02-02 (1).pdf`*
+
+### Intro / Home Entry
+- [ ] Make the intro action icons use a consistent visual style and line weight, especially the camera icon
+
+### Property Cards / Header
+- [ ] Check the logo centering in the property list header
+- [ ] Evaluate increasing the logo size so it feels more prominent than the camera/action area
+- [ ] Improve dark mode styling for the property cards by using darker card backgrounds with white or light gray text
+- [ ] Clean up dark mode across the reviewed screens so the treatment feels consistent end-to-end
+
+### Property Lists Screen
+- [ ] Fix copy and naming issues: `Back Deck Refurb` spelling, duplicated `items` text, and other visible typo regressions
+- [ ] Replace the Shed Cleanup icon with something more appropriate, such as a broom
+- [ ] Increase the visibility of list row chevrons so navigation affordance is clearer
+- [ ] Allow editing of the property name
+- [ ] Fix list-name editing so changes are saved reliably even if the user leaves the screen before navigating into the list
+
+### Fix List Detail Screen
+- [ ] Match the corner radius of the Kim's Bedroom summary block to the rest of the interface
+- [ ] Add support for photo thumbnails on list items
+- [ ] Switch task completion controls to square checkboxes to better match the logo language
+- [ ] Remove item descriptions from the list screen and keep that content on the dedicated item detail screen
+- [ ] Make it more obvious that tapping a task opens details, such as by adding a stronger arrow or affordance
+
+### Dark Mode Direction
+- [ ] Review whether dark mode should use black/gray or the brand's dark navy/blue as the primary surface color
+
+### App Icon Review
+- [ ] Confirm whether the app icon needs a smaller composition that works cleanly inside circular contexts like Apple Watch
+- [ ] Confirm whether Icon Composer / the asset workflow can generate the liquid glass icon variants, and document the required source files if so
+
+---
+
+## Code Review Findings 🔍
+
+*From automated code review - January 2025*
+
+### High Priority
+- [ ] Fix silent error handling - Replace `try? modelContext.save()` with proper error handling
+- [ ] Consolidate duplicate user creation logic (ContentView creates "User", IntroView creates "Rebecca")
+- [ ] Extract business logic from Views into ViewModels (MVVM violation)
+  - [ ] Create `ContentViewModel` for property management
+  - [ ] Create `IntroViewModel` for user management and navigation state
+  - [ ] Create `WelcomeScreenViewModel` for task suggestions
+
+### Medium Priority
+- [ ] Fix inefficient inline sorting in ForEach loops (ContentView.swift:135, 206)
+- [ ] Remove unused code: `LogoBadgeView` struct in IntroView.swift
+- [ ] Remove unused state variable: `showingMenu` in WelcomeScreen.swift
+- [ ] Split large view files into smaller components:
+  - [ ] ContentView.swift (contains 4 view structs)
+  - [ ] IntroView.swift (contains 5 view structs)
+- [ ] Add `@Query` sort descriptors instead of inline sorting
+- [ ] Implement empty `generateThumbnail()` method in FixPhoto.swift or remove it
+
+### Low Priority
+- [ ] Add accessibility labels to all interactive elements
+- [ ] Replace deprecated `.navigationBarHidden(true)` with `.toolbar(.hidden, for: .navigationBar)`
+- [ ] Add confirmation dialogs for destructive delete actions
+- [ ] Update Color extension to support 8-character hex (with alpha)
+- [ ] Create reusable UI components:
+  - [ ] `AddItemButton.swift`
+  - [ ] `CheckboxToggle.swift`
+  - [ ] `TaskRowView.swift`
 
 ---
 
