@@ -62,7 +62,7 @@ struct PhotoMarkupEditor: View {
         }
         .onAppear {
             Self.debugLog(
-                "Opening markup editor. sourcePixels=\(Int(sourceImage.pixelSize.width))x\(Int(sourceImage.pixelSize.height)) approxSourceMemoryMB=\(sourceImage.approximateMemoryBytes / 1_048_576) hasInitialDrawing=\(self.initialDrawingData != nil, privacy: .public)"
+                "Opening markup editor. sourcePixels=\(Int(sourceImage.pixelSize.width))x\(Int(sourceImage.pixelSize.height)) approxSourceMemoryMB=\(sourceImage.approximateMemoryBytes / 1_048_576) hasInitialDrawing=\(self.initialDrawingData != nil)"
             )
 
             if let initialDrawingData,

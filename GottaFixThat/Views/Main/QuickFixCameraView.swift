@@ -258,7 +258,7 @@ struct QuickFixCameraView: View {
 
         do {
             try modelContext.save()
-            Self.debugLog("Saved quick-fix item. itemID=\(newItem.id.uuidString, privacy: .public)")
+            Self.debugLog("Saved quick-fix item. itemID=\(newItem.id.uuidString)")
         } catch {
             Self.logger.error("Failed to save quick-fix item. error=\(String(describing: error), privacy: .public)")
         }

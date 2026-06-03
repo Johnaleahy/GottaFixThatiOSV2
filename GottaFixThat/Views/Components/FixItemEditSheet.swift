@@ -250,7 +250,7 @@ struct FixItemEditSheet: View {
         do {
             try modelContext.save()
             Self.debugLog(
-                "Saved task changes. itemID=\(item.id.uuidString, privacy: .public) existingPhotoCount=\(item.photos.count) pendingNewPhotoCount=\(newPhotos.count) deletedPhotoCount=\(photosToDelete.count)"
+                "Saved task changes. itemID=\(item.id.uuidString) existingPhotoCount=\(item.photos.count) pendingNewPhotoCount=\(newPhotos.count) deletedPhotoCount=\(photosToDelete.count)"
             )
             return true
         } catch {
@@ -264,7 +264,7 @@ struct FixItemEditSheet: View {
         let normalizedImage = annotatedImage.normalizedForStorage()
 
         Self.debugLog(
-            "Starting markup save. photoID=\(photo.id.uuidString, privacy: .public) annotatedPixels=\(Int(annotatedImage.pixelSize.width))x\(Int(annotatedImage.pixelSize.height)) normalizedPixels=\(Int(normalizedImage.pixelSize.width))x\(Int(normalizedImage.pixelSize.height)) approxAnnotatedMemoryMB=\(annotatedImage.approximateMemoryBytes / 1_048_576) drawingBytes=\(drawingData?.count ?? 0)"
+            "Starting markup save. photoID=\(photo.id.uuidString) annotatedPixels=\(Int(annotatedImage.pixelSize.width))x\(Int(annotatedImage.pixelSize.height)) normalizedPixels=\(Int(normalizedImage.pixelSize.width))x\(Int(normalizedImage.pixelSize.height)) approxAnnotatedMemoryMB=\(annotatedImage.approximateMemoryBytes / 1_048_576) drawingBytes=\(drawingData?.count ?? 0)"
         )
 
         guard let imageData = autoreleasepool(invoking: {
@@ -287,7 +287,7 @@ struct FixItemEditSheet: View {
         do {
             try modelContext.save()
             Self.debugLog(
-                "Completed markup save. photoID=\(photo.id.uuidString, privacy: .public) imageBytes=\(imageData.count) thumbnailBytes=\(photo.thumbnailData?.count ?? 0)"
+                "Completed markup save. photoID=\(photo.id.uuidString) imageBytes=\(imageData.count) thumbnailBytes=\(photo.thumbnailData?.count ?? 0)"
             )
             return true
         } catch {

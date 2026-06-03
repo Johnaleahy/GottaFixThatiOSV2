@@ -127,8 +127,8 @@ struct GottaFixThatTests {
         let thumbnailData = try #require(photo.thumbnailData)
         let thumbnailImage = try #require(UIImage(data: thumbnailData))
 
-        #expect(thumbnailImage.size.width <= 200.0)
-        #expect(thumbnailImage.size.height <= 200.0)
+        #expect(thumbnailImage.pixelSize.width <= 200.0)
+        #expect(thumbnailImage.pixelSize.height <= 200.0)
     }
 
     @Test

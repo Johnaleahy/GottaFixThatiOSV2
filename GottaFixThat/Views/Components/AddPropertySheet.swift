@@ -13,7 +13,7 @@ struct AddPropertySheet: View {
     @Environment(\.modelContext) private var modelContext
 
     @State private var propertyName: String = ""
-    @State private var selectedImages: [UIImage] = []
+    @State private var selectedImages: [PendingPhotoDraft] = []
 
     var body: some View {
         NavigationStack {
@@ -23,9 +23,9 @@ struct AddPropertySheet: View {
                 }
 
                 Section("Photo") {
-                    if let image = selectedImages.first {
+                    if let draft = selectedImages.first {
                         HStack {
-                            Image(uiImage: image)
+                            Image(uiImage: draft.image)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 80, height: 80)
@@ -69,7 +69,7 @@ struct AddPropertySheet: View {
 
         // Convert image to data if one was selected
         var imageData: Data? = nil
-        if let image = selectedImages.first {
+        if let image = selectedImages.first?.image {
             imageData = image.jpegData(compressionQuality: 0.8)
         }
 
