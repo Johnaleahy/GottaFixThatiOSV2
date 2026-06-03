@@ -12,12 +12,26 @@ import SwiftData
 struct GottaFixThatApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            User.self,
+            Property.self,
+            FixList.self,
+            FixItem.self,
+            FixPhoto.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+
+            // Load sample data on first launch
+            let context = container.mainContext
+            let descriptor = FetchDescriptor<Property>()
+            let existingProperties = try context.fetch(descriptor)
+            if existingProperties.isEmpty {
+                SampleData.createSampleData(in: context)
+            }
+
+            return container
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
@@ -25,7 +39,7 @@ struct GottaFixThatApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            IntroView()
         }
         .modelContainer(sharedModelContainer)
     }
