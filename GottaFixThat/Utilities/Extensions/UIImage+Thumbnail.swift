@@ -65,7 +65,9 @@ extension UIImage {
             newSize = CGSize(width: maxSize * aspectRatio, height: maxSize)
         }
 
-        let renderer = UIGraphicsImageRenderer(size: newSize)
+        let format = UIGraphicsImageRendererFormat.default()
+        format.scale = 1
+        let renderer = UIGraphicsImageRenderer(size: newSize, format: format)
         return renderer.image { _ in
             self.draw(in: CGRect(origin: .zero, size: newSize))
         }
