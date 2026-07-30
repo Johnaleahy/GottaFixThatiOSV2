@@ -24,6 +24,7 @@ extension Color {
     // Greens
     static let greenAccent = Color(hex: "9aca3c")
     static let greenLight = Color(hex: "f2f7e8")
+
     static let dynamicPageBackground = Color(
         uiColor: UIColor { traits in
             traits.userInterfaceStyle == .dark
@@ -37,6 +38,60 @@ extension Color {
             traits.userInterfaceStyle == .dark
                 ? UIColor(red: 31 / 255, green: 45 / 255, blue: 61 / 255, alpha: 1)
                 : .systemBackground
+        }
+    )
+
+    static let dynamicHeaderCardBackground = Color(
+        uiColor: UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(red: 18 / 255, green: 40 / 255, blue: 68 / 255, alpha: 1)
+                : .systemBackground
+        }
+    )
+
+    static let dynamicFieldBackground = Color(
+        uiColor: UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(red: 23 / 255, green: 51 / 255, blue: 82 / 255, alpha: 1)
+                : .secondarySystemBackground
+        }
+    )
+
+    static let dynamicPrimaryText = Color(
+        uiColor: UIColor { traits in
+            traits.userInterfaceStyle == .dark ? .white : .label
+        }
+    )
+
+    static let dynamicSecondaryText = Color(
+        uiColor: UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(white: 1.0, alpha: 0.78)
+                : .secondaryLabel
+        }
+    )
+
+    static let dynamicTertiaryText = Color(
+        uiColor: UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(red: 190 / 255, green: 204 / 255, blue: 220 / 255, alpha: 1)
+                : .tertiaryLabel
+        }
+    )
+
+    static let dynamicDivider = Color(
+        uiColor: UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(white: 1.0, alpha: 0.10)
+                : .separator
+        }
+    )
+
+    static let dynamicShadow = Color(
+        uiColor: UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor.black.withAlphaComponent(0.35)
+                : UIColor.black.withAlphaComponent(0.12)
         }
     )
 }

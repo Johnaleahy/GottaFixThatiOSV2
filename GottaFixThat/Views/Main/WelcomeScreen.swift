@@ -11,7 +11,6 @@ import SwiftData
 struct WelcomeScreen: View {
     @Query private var users: [User]
     @Query private var fixItems: [FixItem]
-    @Environment(\.modelContext) private var modelContext
     @State private var selectedItems: Set<FixItem> = []
     @State private var showingMenu = false
 
@@ -23,8 +22,7 @@ struct WelcomeScreen: View {
         currentUser?.name ?? "there"
     }
 
-    // Get suggested items based on priority and due date
-    var suggestedItems: [FixItem] {
+    var fallbackSuggestedItems: [FixItem] {
         fixItems
             .filter { !$0.isCompleted }
             .sorted { item1, item2 in
@@ -39,6 +37,14 @@ struct WelcomeScreen: View {
             }
             .prefix(2)
             .map { $0 }
+    }
+
+    var smartPlan: SmartJobPlan? {
+        SmartPlanningService.buildPlan(from: fixItems)
+    }
+
+    var suggestedItems: [FixItem] {
+        smartPlan?.suggestedItems ?? fallbackSuggestedItems
     }
 
     var totalEstimatedTime: Double {
@@ -66,8 +72,7 @@ struct WelcomeScreen: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // Background color - light gray
-                Color.grayLight
+                Color.dynamicPageBackground
                     .ignoresSafeArea()
 
                 VStack(spacing: 0) {
@@ -76,6 +81,10 @@ struct WelcomeScreen: View {
 
                     ScrollView {
                         VStack(spacing: 20) {
+                            if smartPlan != nil {
+                                headerSuggestionCard
+                            }
+
                             // Task list
                             if !suggestedItems.isEmpty {
                                 taskListSection
@@ -169,18 +178,30 @@ struct WelcomeScreen: View {
             .background(Color.blueMedium)
             .cornerRadius(12)
 
-            // AI Suggestion text
-            Text("Hey \(userName), this would be a great day to tackle those indoor painting projects!")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.grayDark)
-                .fixedSize(horizontal: false, vertical: true)
+            VStack(alignment: .leading, spacing: 6) {
+                Text(smartPlan?.headline ?? "Suggested plan")
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundColor(.greenAccent)
+
+                Text(planMessage)
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(.dynamicPrimaryText)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                if let smartPlan {
+                    Text("\(smartPlan.focusLabel.uppercased()) FOCUS • \(smartPlan.suggestedItems.count) JOBS")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundColor(.dynamicTertiaryText)
+                        .tracking(1)
+                }
+            }
 
             Spacer()
         }
         .padding()
-        .background(Color.white)
+        .background(Color.dynamicHeaderCardBackground)
         .cornerRadius(15)
-        .shadow(color: .gray.opacity(0.2), radius: 5, x: 0, y: 2)
+        .shadow(color: .dynamicShadow, radius: 5, x: 0, y: 2)
     }
 
     // MARK: - Task List Section
@@ -197,7 +218,7 @@ struct WelcomeScreen: View {
                     // Task title
                     Text(item.title)
                         .font(.system(size: 18, weight: .regular))
-                        .foregroundColor(.grayDark)
+                        .foregroundColor(.dynamicPrimaryText)
 
                     Spacer()
 
@@ -215,7 +236,7 @@ struct WelcomeScreen: View {
                     // Chevron
                     Image(systemName: "chevron.right")
                         .font(.system(size: 14))
-                        .foregroundColor(.grayMedium)
+                        .foregroundColor(.dynamicTertiaryText)
                         .padding(.leading, 8)
                 }
                 .padding(.horizontal, 20)
@@ -224,11 +245,13 @@ struct WelcomeScreen: View {
                 if item != suggestedItems.last {
                     Divider()
                         .padding(.leading, 20)
+                        .overlay(Color.dynamicDivider)
                 }
             }
         }
-        .background(Color.white)
+        .background(Color.dynamicCardBackground)
         .cornerRadius(12)
+        .shadow(color: .dynamicShadow, radius: 4, x: 0, y: 2)
         .padding(.horizontal)
     }
 
@@ -237,22 +260,27 @@ struct WelcomeScreen: View {
         VStack(alignment: .leading, spacing: 5) {
             Text("ESTIMATED TIME")
                 .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(.grayMedium)
+                .foregroundColor(.dynamicTertiaryText)
                 .tracking(1)
 
             HStack(spacing: 8) {
                 Image(systemName: "clock")
                     .font(.system(size: 18))
-                    .foregroundColor(.grayMedium)
+                    .foregroundColor(.dynamicTertiaryText)
 
-                Text("\(Int(totalEstimatedTime)) Hours")
+                Text(estimatedTimeText)
                     .font(.system(size: 18, weight: .regular))
-                    .foregroundColor(.grayDark)
+                    .foregroundColor(.dynamicPrimaryText)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 20)
         .padding(.top, 20)
+        .padding(.bottom, 8)
+        .background(Color.dynamicCardBackground)
+        .cornerRadius(12)
+        .shadow(color: .dynamicShadow, radius: 4, x: 0, y: 2)
+        .padding(.horizontal)
     }
 
     // MARK: - Motivational Section
@@ -261,12 +289,12 @@ struct WelcomeScreen: View {
             // Paint can illustration (using SF Symbol as placeholder)
             Image(systemName: "paintbrush.fill")
                 .font(.system(size: 80))
-                .foregroundColor(.grayLight.opacity(0.5))
+                .foregroundColor(.dynamicTertiaryText.opacity(0.35))
                 .padding(.bottom, 10)
 
             Text("You've got this!")
                 .font(.system(size: 20, weight: .semibold))
-                .foregroundColor(.grayDark)
+                .foregroundColor(.dynamicPrimaryText)
         }
         .padding(.vertical, 30)
     }
@@ -274,9 +302,9 @@ struct WelcomeScreen: View {
     // MARK: - Next Steps Button
     private var nextStepsButton: some View {
         Button(action: {
-            // TODO: Navigate to next steps
+            applySuggestedPlan()
         }) {
-            Text("NEXT STEPS")
+            Text("LOAD TODAY'S PLAN")
                 .font(.system(size: 18, weight: .bold))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
@@ -297,14 +325,33 @@ struct WelcomeScreen: View {
         }
     }
 
+    private var estimatedTimeText: String {
+        let hours = totalEstimatedTime > 0 ? totalEstimatedTime : (smartPlan?.totalEstimatedHours ?? 0)
+        if hours == 0 {
+            return "No estimate yet"
+        }
+        return "\(String(format: "%.1f", hours)) Hours"
+    }
+
+    private var planMessage: String {
+        if let smartPlan {
+            return smartPlan.summary
+        }
+        return "Hey \(userName), this would be a good time to tackle a few quick wins."
+    }
+
+    private func applySuggestedPlan() {
+        selectedItems = Set(suggestedItems)
+    }
+
     private func tagColor(for tag: String) -> Color {
         switch tag.lowercased() {
         case "kitchen":
             return .blueMedium
         case "kim's bedroom", "bedroom":
-            return .purple
+            return .greenAccent
         case "exterior":
-            return .orange
+            return .blueLight
         default:
             return .blueDark
         }
@@ -333,7 +380,7 @@ struct MenuView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.white)
+        .background(Color.dynamicCardBackground)
     }
 }
 

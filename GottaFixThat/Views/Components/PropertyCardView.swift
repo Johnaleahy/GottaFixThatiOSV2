@@ -10,19 +10,6 @@ import SwiftData
 
 struct PropertyCardView: View {
     let property: Property
-    @Environment(\.colorScheme) private var colorScheme
-
-    private var titleColor: Color {
-        colorScheme == .dark ? .white : .blueDark
-    }
-
-    private var cardBackgroundColor: Color {
-        colorScheme == .dark ? .blueNight : Color(.systemBackground)
-    }
-
-    private var chevronColor: Color {
-        colorScheme == .dark ? .greenAccent : .blueMedium
-    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -38,24 +25,24 @@ struct PropertyCardView: View {
                     Text(property.name)
                         .font(.title2)
                         .fontWeight(.semibold)
-                        .foregroundStyle(titleColor)
+                        .foregroundStyle(Color.dynamicPrimaryText)
 
                     Text("\(property.itemCount) items")
                         .font(.subheadline)
-                        .foregroundStyle(colorScheme == .dark ? Color.white.opacity(0.78) : .secondary)
+                        .foregroundStyle(Color.dynamicSecondaryText)
                 }
 
                 Spacer()
 
                 Image(systemName: "chevron.right")
                     .font(.title2.weight(.bold))
-                    .foregroundStyle(chevronColor)
+                    .foregroundStyle(Color.greenAccent)
             }
             .padding()
-            .background(cardBackgroundColor)
+            .background(Color.dynamicCardBackground)
         }
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: .black.opacity(0.15), radius: 8, x: 0, y: 4)
+        .shadow(color: .dynamicShadow, radius: 8, x: 0, y: 4)
     }
 
     @ViewBuilder
@@ -71,8 +58,8 @@ struct PropertyCardView: View {
             Image(systemName: "house.fill")
                 .resizable()
                 .padding(40)
-                .foregroundStyle(.secondary)
-                .background(Color(.secondarySystemBackground))
+                .foregroundStyle(Color.dynamicSecondaryText)
+                .background(Color.dynamicFieldBackground)
         }
     }
 }

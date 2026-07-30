@@ -17,13 +17,19 @@ struct GottaFixThatTests {
     @Test
     func toggleCompletion_marksItemCompletedAndSetsTimestamps() {
         let originalUpdatedAt = Date(timeIntervalSince1970: 1_000)
-        let item = FixItem(title: "Replace deck board")
+        let item = FixItem(
+            title: "Replace deck board",
+            notificationsEnabled: true,
+            reminderDate: Date(timeIntervalSinceNow: 3_600)
+        )
         item.updatedAt = originalUpdatedAt
 
         item.toggleCompletion()
 
         #expect(item.isCompleted)
         #expect(item.completedAt != nil)
+        #expect(item.notificationsEnabled == false)
+        #expect(item.reminderDate == nil)
         #expect(item.updatedAt > originalUpdatedAt)
     }
 
@@ -157,6 +163,35 @@ struct GottaFixThatTests {
         #expect(fetchedUser.id == existingUser.id)
         #expect(users.count == 1)
         #expect(users.first?.name == "Existing User")
+    }
+
+    @Test
+    func smartPlanningService_prioritizesOverdueAndHighPriorityItems() {
+        let overdue = FixItem(
+            title: "Leaking sink",
+            priority: .medium,
+            dueDate: Date(timeIntervalSinceNow: -86_400),
+            estimatedTimeHours: 1
+        )
+        let highPriority = FixItem(
+            title: "Broken railing",
+            priority: .high,
+            dueDate: Date(timeIntervalSinceNow: 172_800),
+            estimatedTimeHours: 2
+        )
+        let lowPriority = FixItem(
+            title: "Organize shed",
+            priority: .low,
+            dueDate: Date(timeIntervalSinceNow: 604_800),
+            estimatedTimeHours: 4
+        )
+
+        let plan = SmartPlanningService.buildPlan(from: [lowPriority, highPriority, overdue])
+
+        #expect(plan != nil)
+        #expect(plan?.suggestedItems.first?.title == "Leaking sink")
+        #expect(plan?.suggestedItems.map(\.title).contains("Broken railing") == true)
+        #expect(plan?.headline == "Start with overdue fixes")
     }
 
     private func makeInMemoryContainer() throws -> ModelContainer {

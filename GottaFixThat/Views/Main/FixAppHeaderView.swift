@@ -14,6 +14,11 @@ struct FixAppHeaderView: View {
     var onMenuTap: (() -> Void)? = nil
 
     @State private var showingAddProperty = false
+    @State private var propertyToEdit: Property?
+
+    private var activeProperties: [Property] {
+        properties.filter { !$0.isArchived }
+    }
 
     var body: some View {
         NavigationStack {
@@ -21,11 +26,24 @@ struct FixAppHeaderView: View {
                 // Property cards
                 ScrollView {
                     VStack(spacing: 16) {
-                        ForEach(properties) { property in
+                        ForEach(activeProperties) { property in
                             NavigationLink(value: property) {
                                 PropertyCardView(property: property)
                             }
                             .buttonStyle(.plain)
+                            .contextMenu {
+                                Button("Edit Property") {
+                                    propertyToEdit = property
+                                }
+
+                                Button("Archive Property", role: .destructive) {
+                                    archive(property)
+                                }
+
+                                Button("Delete Property", role: .destructive) {
+                                    delete(property)
+                                }
+                            }
                         }
                     }
                     .padding()
@@ -37,9 +55,9 @@ struct FixAppHeaderView: View {
                     Button(action: { dismiss() }) {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(Color.blueDark)
+                            .foregroundStyle(Color.dynamicPrimaryText)
                             .frame(width: 36, height: 36)
-                            .background(Color.grayLight)
+                            .background(Color.dynamicHeaderCardBackground)
                             .clipShape(Circle())
                     }
                 }
@@ -48,9 +66,9 @@ struct FixAppHeaderView: View {
                     Button(action: { showingAddProperty = true }) {
                         Image(systemName: "plus")
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(Color.blueDark)
+                            .foregroundStyle(Color.dynamicPrimaryText)
                             .frame(width: 36, height: 36)
-                            .background(Color.grayLight)
+                            .background(Color.dynamicHeaderCardBackground)
                             .clipShape(Circle())
                     }
                 }
@@ -58,10 +76,25 @@ struct FixAppHeaderView: View {
             .sheet(isPresented: $showingAddProperty) {
                 AddPropertySheet()
             }
+            .sheet(item: $propertyToEdit) { property in
+                AddPropertySheet(property: property)
+            }
             .navigationDestination(for: Property.self) { property in
                 PropertyListsView(property: property)
             }
         }
+    }
+
+    private func archive(_ property: Property) {
+        property.isArchived = true
+        property.updatedAt = Date()
+        try? property.modelContext?.save()
+    }
+
+    private func delete(_ property: Property) {
+        guard let context = property.modelContext else { return }
+        context.delete(property)
+        try? context.save()
     }
 }
 

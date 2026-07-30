@@ -17,6 +17,7 @@ final class Property: Hashable {
     var imageData: Data?
     var assetImageName: String?
     var isFavorite: Bool
+    var isArchived: Bool = false
     var createdAt: Date
     var updatedAt: Date
 
@@ -38,12 +39,20 @@ final class Property: Hashable {
     }
 
     // MARK: - Initialization
-    init(name: String, imageData: Data? = nil, assetImageName: String? = nil, isFavorite: Bool = false, owner: User? = nil) {
+    init(
+        name: String,
+        imageData: Data? = nil,
+        assetImageName: String? = nil,
+        isFavorite: Bool = false,
+        isArchived: Bool = false,
+        owner: User? = nil
+    ) {
         self.id = UUID()
         self.name = name
         self.imageData = imageData
         self.assetImageName = assetImageName
         self.isFavorite = isFavorite
+        self.isArchived = isArchived
         self.createdAt = Date()
         self.updatedAt = Date()
         self.lists = []

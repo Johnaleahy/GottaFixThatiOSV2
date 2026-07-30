@@ -11,7 +11,6 @@ import SwiftData
 struct FixListDetailView: View {
     let list: FixList
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.colorScheme) private var colorScheme
 
     // Inline editing state
     @State private var editingItemId: UUID?
@@ -70,15 +69,12 @@ struct FixListDetailView: View {
 
     @ViewBuilder
     private var listHeader: some View {
-        let primaryTextColor = colorScheme == .dark ? Color.white : Color.primary
-        let secondaryTextColor = colorScheme == .dark ? Color.white.opacity(0.78) : Color.secondary
-
         VStack(alignment: .leading, spacing: 12) {
             // List name
             Text(list.name)
                 .font(.title2)
                 .fontWeight(.bold)
-                .foregroundStyle(primaryTextColor)
+                .foregroundStyle(Color.dynamicPrimaryText)
 
             HStack(spacing: 16) {
                 // Icon
@@ -96,13 +92,13 @@ struct FixListDetailView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("\(list.completedCount) of \(list.itemCount) completed")
                         .font(.subheadline)
-                        .foregroundStyle(secondaryTextColor)
+                        .foregroundStyle(Color.dynamicSecondaryText)
 
                     // Progress bar
                     GeometryReader { geometry in
                         ZStack(alignment: .leading) {
                             RoundedRectangle(cornerRadius: 4)
-                                .fill(Color.gray.opacity(0.2))
+                                .fill(Color.dynamicDivider)
                                 .frame(height: 8)
 
                             RoundedRectangle(cornerRadius: 4)
@@ -123,9 +119,9 @@ struct FixListDetailView: View {
             }
         }
         .padding()
-        .background(Color.dynamicCardBackground)
+        .background(Color.dynamicHeaderCardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
+        .shadow(color: .dynamicShadow, radius: 4, x: 0, y: 2)
         .padding(.vertical, 8)
     }
 
@@ -152,11 +148,11 @@ struct FixListDetailView: View {
                                 saveEditingTitle()
                             }
                             .strikethrough(item.isCompleted)
-                            .foregroundColor(item.isCompleted ? .secondary : .primary)
+                            .foregroundColor(item.isCompleted ? .dynamicSecondaryText : .dynamicPrimaryText)
                     } else {
                         Text(item.title)
                             .strikethrough(item.isCompleted)
-                            .foregroundColor(item.isCompleted ? .secondary : .primary)
+                            .foregroundColor(item.isCompleted ? .dynamicSecondaryText : .dynamicPrimaryText)
                             .contentShape(Rectangle())
                             .onTapGesture {
                                 startEditingTitle(for: item)
@@ -172,7 +168,7 @@ struct FixListDetailView: View {
                                 Text(dueDate, style: .date)
                             }
                             .font(.caption2)
-                            .foregroundColor(item.isOverdue ? .red : .secondary)
+                            .foregroundColor(item.isOverdue ? .red : .dynamicSecondaryText)
                         }
 
                         if let hours = item.estimatedTimeHours {
@@ -181,7 +177,7 @@ struct FixListDetailView: View {
                                 Text("\(hours, specifier: "%.1f")h")
                             }
                             .font(.caption2)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.dynamicSecondaryText)
                         }
 
                         if !item.photos.isEmpty {
@@ -190,7 +186,7 @@ struct FixListDetailView: View {
                                 Text("\(item.photos.count)")
                             }
                             .font(.caption2)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.dynamicSecondaryText)
                         }
                     }
                 }
@@ -227,7 +223,11 @@ struct FixListDetailView: View {
             if let item = sortedItems.first(where: { $0.id == editingId }) {
                 item.title = trimmedTitle
                 item.updatedAt = Date()
-                try? modelContext.save()
+                do {
+                    try modelContext.save()
+                } catch {
+                    assertionFailure("Failed to save edited item title: \(error)")
+                }
             }
         }
 
@@ -238,7 +238,18 @@ struct FixListDetailView: View {
     private func toggleItem(_ item: FixItem) {
         withAnimation {
             item.toggleCompletion()
-            try? modelContext.save()
+            do {
+                try modelContext.save()
+            } catch {
+                assertionFailure("Failed to toggle item completion: \(error)")
+            }
+            Task {
+                do {
+                    try await NotificationScheduler.shared.syncReminder(for: item)
+                } catch {
+                    assertionFailure("Failed to sync reminder after toggle: \(error)")
+                }
+            }
         }
     }
 
@@ -251,7 +262,11 @@ struct FixListDetailView: View {
                 sortOrder: list.items.count
             )
             modelContext.insert(newItem)
-            try? modelContext.save()
+            do {
+                try modelContext.save()
+            } catch {
+                assertionFailure("Failed to save new item: \(error)")
+            }
         }
     }
 

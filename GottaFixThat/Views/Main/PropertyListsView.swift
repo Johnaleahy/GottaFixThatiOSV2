@@ -11,7 +11,6 @@ import SwiftData
 struct PropertyListsView: View {
     let property: Property
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.colorScheme) private var colorScheme
 
     // Inline editing state
     @State private var isEditingPropertyName = false
@@ -94,16 +93,13 @@ struct PropertyListsView: View {
 
     @ViewBuilder
     private var propertyStatsBar: some View {
-        let primaryTextColor = colorScheme == .dark ? Color.white : Color.primary
-        let secondaryTextColor = colorScheme == .dark ? Color.white.opacity(0.78) : Color.secondary
-
         VStack(spacing: 8) {
             // Property name
             Group {
                 if isEditingPropertyName {
                     TextField("Property name", text: $editingPropertyName)
                         .font(.title2.weight(.bold))
-                        .foregroundStyle(primaryTextColor)
+                        .foregroundStyle(Color.dynamicPrimaryText)
                         .focused($isPropertyNameFocused)
                         .submitLabel(.done)
                         .onSubmit {
@@ -113,7 +109,7 @@ struct PropertyListsView: View {
                     Text(property.name)
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundStyle(primaryTextColor)
+                        .foregroundStyle(Color.dynamicPrimaryText)
                         .onTapGesture {
                             startEditingPropertyName()
                         }
@@ -129,46 +125,48 @@ struct PropertyListsView: View {
                     Text("\(property.lists.count)")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundStyle(primaryTextColor)
+                        .foregroundStyle(Color.dynamicPrimaryText)
                     Text("Lists")
                         .font(.caption)
-                        .foregroundStyle(secondaryTextColor)
+                        .foregroundStyle(Color.dynamicSecondaryText)
                 }
                 .frame(maxWidth: .infinity)
 
                 Divider()
                     .frame(height: 40)
+                    .overlay(Color.dynamicDivider)
 
                 VStack {
                     Text("\(property.itemCount)")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundStyle(primaryTextColor)
+                        .foregroundStyle(Color.dynamicPrimaryText)
                     Text("Items")
                         .font(.caption)
-                        .foregroundStyle(secondaryTextColor)
+                        .foregroundStyle(Color.dynamicSecondaryText)
                 }
                 .frame(maxWidth: .infinity)
 
                 Divider()
                     .frame(height: 40)
+                    .overlay(Color.dynamicDivider)
 
                 VStack {
                     Text("\(property.completedItemCount)")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundStyle(primaryTextColor)
+                        .foregroundStyle(Color.dynamicPrimaryText)
                     Text("Done")
                         .font(.caption)
-                        .foregroundStyle(secondaryTextColor)
+                        .foregroundStyle(Color.dynamicSecondaryText)
                 }
                 .frame(maxWidth: .infinity)
             }
             .padding(.vertical, 12)
         }
-        .background(colorScheme == .dark ? Color.blueNight : Color(.systemBackground))
+        .background(Color.dynamicHeaderCardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: .black.opacity(0.1), radius: 4, x: 0, y: 2)
+        .shadow(color: .dynamicShadow, radius: 4, x: 0, y: 2)
         .padding(.vertical, 8)
     }
 
@@ -190,6 +188,7 @@ struct PropertyListsView: View {
                 } else {
                     Text(list.name)
                         .font(.headline)
+                        .foregroundStyle(Color.dynamicPrimaryText)
                         .contentShape(Rectangle())
                         .onTapGesture {
                             startEditingName(for: list)
@@ -197,7 +196,7 @@ struct PropertyListsView: View {
                 }
                 Text("\(list.itemCount) items • \(list.completedCount) completed")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.dynamicSecondaryText)
             }
 
             Spacer()
@@ -273,7 +272,11 @@ struct PropertyListsView: View {
                 sortOrder: property.lists.count
             )
             modelContext.insert(newList)
-            try? modelContext.save()
+            do {
+                try modelContext.save()
+            } catch {
+                assertionFailure("Failed to save new list: \(error)")
+            }
         }
     }
 

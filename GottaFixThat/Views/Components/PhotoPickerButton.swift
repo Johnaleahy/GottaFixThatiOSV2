@@ -23,6 +23,9 @@ struct PendingPhotoDraft: Identifiable {
 
 struct PhotoPickerButton: View {
     @Binding var selectedImages: [PendingPhotoDraft]
+    var maxSelectionCount: Int = 10
+    var replaceSelection: Bool = false
+    var buttonLabel: String = "Add Photos"
 
     @State private var showingPhotoPicker = false
     @State private var showingCamera = false
@@ -46,12 +49,12 @@ struct PhotoPickerButton: View {
                 Label("Choose from Library", systemImage: "photo.on.rectangle")
             }
         } label: {
-            Label("Add Photos", systemImage: "plus.circle.fill")
+            Label(buttonLabel, systemImage: "plus.circle.fill")
         }
         .photosPicker(
             isPresented: $showingPhotoPicker,
             selection: $photoPickerItems,
-            maxSelectionCount: 10,
+            maxSelectionCount: maxSelectionCount,
             matching: .images
         )
         .onChange(of: photoPickerItems) { _, newItems in
@@ -67,7 +70,7 @@ struct PhotoPickerButton: View {
                     Self.debugLog(
                         "Imported camera photo. sourcePixels=\(Int(image.pixelSize.width))x\(Int(image.pixelSize.height)) normalizedPixels=\(Int(normalizedImage.pixelSize.width))x\(Int(normalizedImage.pixelSize.height))"
                     )
-                    selectedImages.append(PendingPhotoDraft(image: normalizedImage))
+                    applySelection(PendingPhotoDraft(image: normalizedImage))
                 }
             }
         }
@@ -82,9 +85,21 @@ struct PhotoPickerButton: View {
                     "Imported library photo. sourcePixels=\(Int(image.pixelSize.width))x\(Int(image.pixelSize.height)) normalizedPixels=\(Int(normalizedImage.pixelSize.width))x\(Int(normalizedImage.pixelSize.height))"
                 )
                 await MainActor.run {
-                    selectedImages.append(PendingPhotoDraft(image: normalizedImage))
+                    applySelection(PendingPhotoDraft(image: normalizedImage))
                 }
             }
+        }
+    }
+
+    private func applySelection(_ draft: PendingPhotoDraft) {
+        if replaceSelection || maxSelectionCount == 1 {
+            selectedImages = [draft]
+            return
+        }
+
+        selectedImages.append(draft)
+        if selectedImages.count > maxSelectionCount {
+            selectedImages = Array(selectedImages.prefix(maxSelectionCount))
         }
     }
 }

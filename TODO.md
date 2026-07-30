@@ -25,6 +25,9 @@
 
 ### Basic CRUD Operations
 - [ ] Create new properties
+- [ ] Add ability to archive or delete a property
+- [ ] Allow changing the photo for an existing property
+- [ ] Review property photo model and UX: currently only one photo is allowed per property
 - [ ] Create new lists within properties
 - [ ] Add items to lists
 - [ ] Mark items as complete/incomplete
@@ -87,6 +90,7 @@
 ### Smart Features
 - [ ] Personalized welcome messages ("Hey Rebecca!")
 - [ ] Add AI features and job planning
+  - Initial smart job planning engine and welcome-screen plan card implemented on `codex/notifications-darkmode-ai-planning`
 - [ ] AI task suggestions based on date/season
 - [ ] Weather-based recommendations
 - [ ] Time estimation calculator for grouped tasks
@@ -103,11 +107,11 @@
 ## Phase 4: Polish & Production 🎨
 
 ### Notifications
-- [ ] Set up notifications
-- [ ] Local notifications for due items
-- [ ] Reminder scheduling
+- [x] Set up notifications
+- [x] Local notifications for due items
+- [x] Reminder scheduling
 - [ ] Push notifications for shared list updates
-- [ ] Notification settings per item
+- [x] Notification settings per item
 
 ### Performance & Polish
 - [ ] App icon and launch screen
@@ -180,8 +184,8 @@
 ### Property Cards / Header
 - [ ] Check the logo centering in the property list header
 - [ ] Evaluate increasing the logo size so it feels more prominent than the camera/action area
-- [ ] Improve dark mode styling for the property cards by using darker card backgrounds with white or light gray text
-- [ ] Clean up dark mode across the reviewed screens so the treatment feels consistent end-to-end
+- [x] Improve dark mode styling for the property cards by using darker card backgrounds with white or light gray text
+- [x] Clean up dark mode across the reviewed screens so the treatment feels consistent end-to-end
 
 ### Property Lists Screen
 - [ ] Fix copy and naming issues: `Back Deck Refurb` spelling, duplicated `items` text, and other visible typo regressions
@@ -198,7 +202,7 @@
 - [ ] Make it more obvious that tapping a task opens details, such as by adding a stronger arrow or affordance
 
 ### Dark Mode Direction
-- [ ] Review whether dark mode should use black/gray or the brand's dark navy/blue as the primary surface color
+- [x] Review whether dark mode should use black/gray or the brand's dark navy/blue as the primary surface color
 
 ### App Icon Review
 - [ ] Confirm whether the app icon needs a smaller composition that works cleanly inside circular contexts like Apple Watch

@@ -40,6 +40,8 @@ final class FixItem {
     var isCompleted: Bool
     var priority: FixPriority
     var dueDate: Date?
+    var notificationsEnabled: Bool = false
+    var reminderDate: Date? = nil
     var estimatedTimeHours: Double?
     var createdAt: Date
     var updatedAt: Date
@@ -75,6 +77,8 @@ final class FixItem {
         isCompleted: Bool = false,
         priority: FixPriority = .medium,
         dueDate: Date? = nil,
+        notificationsEnabled: Bool = false,
+        reminderDate: Date? = nil,
         estimatedTimeHours: Double? = nil,
         tags: [String] = [],
         list: FixList? = nil,
@@ -86,6 +90,8 @@ final class FixItem {
         self.isCompleted = isCompleted
         self.priority = priority
         self.dueDate = dueDate
+        self.notificationsEnabled = notificationsEnabled
+        self.reminderDate = reminderDate
         self.estimatedTimeHours = estimatedTimeHours
         self.tags = tags
         self.createdAt = Date()
@@ -100,6 +106,10 @@ final class FixItem {
     func toggleCompletion() {
         isCompleted.toggle()
         completedAt = isCompleted ? Date() : nil
+        if isCompleted {
+            notificationsEnabled = false
+            reminderDate = nil
+        }
         updatedAt = Date()
     }
 }

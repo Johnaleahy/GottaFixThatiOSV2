@@ -18,6 +18,8 @@ struct FixItemEditSheet: View {
     @State private var priority: FixPriority
     @State private var hasDueDate: Bool
     @State private var dueDate: Date
+    @State private var notificationsEnabled: Bool
+    @State private var reminderDate: Date
     @State private var hasEstimatedTime: Bool
     @State private var estimatedTimeHours: Double
     @State private var tags: [String]
@@ -44,6 +46,8 @@ struct FixItemEditSheet: View {
         _priority = State(initialValue: item.priority)
         _hasDueDate = State(initialValue: item.dueDate != nil)
         _dueDate = State(initialValue: item.dueDate ?? Date())
+        _notificationsEnabled = State(initialValue: item.notificationsEnabled)
+        _reminderDate = State(initialValue: item.reminderDate ?? item.dueDate ?? Date())
         _hasEstimatedTime = State(initialValue: item.estimatedTimeHours != nil)
         _estimatedTimeHours = State(initialValue: item.estimatedTimeHours ?? 1.0)
         _tags = State(initialValue: item.tags)
@@ -83,6 +87,29 @@ struct FixItemEditSheet: View {
                             selection: $dueDate,
                             displayedComponents: [.date]
                         )
+                    }
+                }
+
+                Section("Reminder") {
+                    if hasDueDate {
+                        Toggle("Remind Me", isOn: $notificationsEnabled.animation())
+
+                        if notificationsEnabled {
+                            DatePicker(
+                                "Reminder Time",
+                                selection: $reminderDate,
+                                in: Date()...,
+                                displayedComponents: [.date, .hourAndMinute]
+                            )
+
+                            Text("This creates a local reminder on this device.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    } else {
+                        Text("Add a due date first to schedule a reminder.")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
                     }
                 }
 
@@ -171,12 +198,21 @@ struct FixItemEditSheet: View {
 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        if saveChanges() {
-                            dismiss()
+                        Task {
+                            if await saveChanges() {
+                                dismiss()
+                            }
                         }
                     }
                     .disabled(title.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
+            }
+        }
+        .onChange(of: hasDueDate) { _, newValue in
+            if newValue == false {
+                notificationsEnabled = false
+            } else if reminderDate < Date() {
+                reminderDate = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: dueDate) ?? dueDate
             }
         }
         .sheet(item: $photoToMarkup) { photo in
@@ -218,11 +254,18 @@ struct FixItemEditSheet: View {
         }
     }
 
-    private func saveChanges() -> Bool {
+    private func saveChanges() async -> Bool {
+        if notificationsEnabled && reminderDate <= Date() {
+            saveErrorMessage = "Reminder time must be in the future."
+            return false
+        }
+
         item.title = title.trimmingCharacters(in: .whitespaces)
         item.notes = notes
         item.priority = priority
         item.dueDate = hasDueDate ? dueDate : nil
+        item.notificationsEnabled = hasDueDate && notificationsEnabled
+        item.reminderDate = item.notificationsEnabled ? reminderDate : nil
         item.estimatedTimeHours = hasEstimatedTime ? estimatedTimeHours : nil
         item.tags = tags
         item.updatedAt = Date()
@@ -249,6 +292,13 @@ struct FixItemEditSheet: View {
 
         do {
             try modelContext.save()
+            do {
+                try await NotificationScheduler.shared.syncReminder(for: item)
+            } catch {
+                Self.logger.error("Failed to sync reminder. itemID=\(item.id.uuidString, privacy: .public) error=\(String(describing: error), privacy: .public)")
+                saveErrorMessage = error.localizedDescription
+                return false
+            }
             Self.debugLog(
                 "Saved task changes. itemID=\(item.id.uuidString) existingPhotoCount=\(item.photos.count) pendingNewPhotoCount=\(newPhotos.count) deletedPhotoCount=\(photosToDelete.count)"
             )

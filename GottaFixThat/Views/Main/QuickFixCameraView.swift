@@ -39,7 +39,7 @@ struct QuickFixCameraView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.grayLight.ignoresSafeArea()
+                Color.dynamicPageBackground.ignoresSafeArea()
 
                 if capturedImage != nil {
                     formView
@@ -52,11 +52,11 @@ struct QuickFixCameraView: View {
                 ToolbarItem(placement: .principal) {
                     Text("Quick Fix")
                         .font(.system(size: 18, weight: .bold))
-                        .foregroundColor(.blueDark)
+                        .foregroundColor(.dynamicPrimaryText)
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { dismiss() }
-                        .foregroundColor(.blueDark)
+                        .foregroundColor(.dynamicPrimaryText)
                 }
             }
         }
@@ -114,17 +114,17 @@ struct QuickFixCameraView: View {
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(.blueDark)
                         .padding(10)
-                        .background(Color.white)
+                        .background(Color.dynamicHeaderCardBackground)
                         .clipShape(Circle())
-                        .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
+                        .shadow(color: .dynamicShadow, radius: 4, x: 0, y: 2)
                 }
                 .padding(10)
             }
         }
         .padding()
-        .background(Color.white)
+        .background(Color.dynamicCardBackground)
         .cornerRadius(15)
-        .shadow(color: .gray.opacity(0.15), radius: 4, x: 0, y: 2)
+        .shadow(color: .dynamicShadow, radius: 4, x: 0, y: 2)
     }
 
     private var titleCard: some View {
@@ -133,16 +133,16 @@ struct QuickFixCameraView: View {
 
             TextField("What needs fixing?", text: $taskTitle)
                 .font(.system(size: 17))
-                .foregroundColor(.grayDark)
+                .foregroundColor(.dynamicPrimaryText)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 12)
-                .background(Color.grayLight)
+                .background(Color.dynamicFieldBackground)
                 .cornerRadius(10)
         }
         .padding()
-        .background(Color.white)
+        .background(Color.dynamicCardBackground)
         .cornerRadius(15)
-        .shadow(color: .gray.opacity(0.15), radius: 4, x: 0, y: 2)
+        .shadow(color: .dynamicShadow, radius: 4, x: 0, y: 2)
     }
 
     private var listCard: some View {
@@ -152,7 +152,7 @@ struct QuickFixCameraView: View {
             if allLists.isEmpty {
                 Text("No lists yet. Create a property and list before adding a quick fix.")
                     .font(.system(size: 14))
-                    .foregroundColor(.grayDark)
+                    .foregroundColor(.dynamicPrimaryText)
                     .padding(.vertical, 8)
             } else {
                 VStack(spacing: 0) {
@@ -170,9 +170,9 @@ struct QuickFixCameraView: View {
             }
         }
         .padding()
-        .background(Color.white)
+        .background(Color.dynamicCardBackground)
         .cornerRadius(15)
-        .shadow(color: .gray.opacity(0.15), radius: 4, x: 0, y: 2)
+        .shadow(color: .dynamicShadow, radius: 4, x: 0, y: 2)
     }
 
     private func listRow(for list: FixList) -> some View {
@@ -186,12 +186,12 @@ struct QuickFixCameraView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(list.name)
                     .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.grayDark)
+                    .foregroundColor(.dynamicPrimaryText)
 
                 if let propertyName = list.property?.name {
                     Text(propertyName)
                         .font(.system(size: 12))
-                        .foregroundColor(.grayMedium)
+                        .foregroundColor(.dynamicSecondaryText)
                 }
             }
 
@@ -222,7 +222,7 @@ struct QuickFixCameraView: View {
     private func cardLabel(_ text: String) -> some View {
         Text(text)
             .font(.system(size: 12, weight: .semibold))
-            .foregroundColor(.grayMedium)
+            .foregroundColor(.dynamicTertiaryText)
             .tracking(1)
     }
 
@@ -230,10 +230,10 @@ struct QuickFixCameraView: View {
         VStack(spacing: 16) {
             Image(systemName: "camera.fill")
                 .font(.system(size: 48))
-                .foregroundColor(.grayMedium)
+                .foregroundColor(.dynamicTertiaryText)
             Text("Opening camera…")
                 .font(.system(size: 16))
-                .foregroundColor(.grayDark)
+                .foregroundColor(.dynamicPrimaryText)
         }
     }
 
